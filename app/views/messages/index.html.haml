@@ -1,0 +1,62 @@
+.wrapper
+
+  = render 'side_bar'
+
+  .main
+    .header
+      .left-header
+        .left-header__title
+          グループ名
+
+        %ul.left-header__users
+          Member：
+          %li.user
+            ユーザー名
+          %li.user
+            ユーザー名
+          %li.user
+            ユーザー名
+
+      .right-header
+        .right-header__button
+          Edit
+
+    .messages
+
+      .message
+        .upper-message
+          .upper-message__user-name
+            ユーザー名
+          .upper-message__date
+            2019/03/18
+        .lower-meesage
+          .lower-message__content
+            メッセージ
+
+      .message
+        .upper-message
+          .upper-message__user-name
+            ユーザー名
+          .upper-message__date
+            2019/03/18
+        .lower-meesage
+          .lower-message__content
+            メッセージ
+
+      .message
+        .upper-message
+          .upper-message__user-name
+            ユーザー名
+          .upper-message__date
+            2019/03/18
+        .lower-meesage
+          .lower-message__content
+            メッセージ
+    .form
+      %form
+        %input.form__message{:name => "body", :placeholder => "type a message", :type => "text"}
+        .form__mask
+          %label.form__mask__image
+            = fa_icon 'picture-o', class: 'icon'
+            %input.hidden{type: 'file'}
+        %input.form__submit{type: 'submit', value: 'Send'}
