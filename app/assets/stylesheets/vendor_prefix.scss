@@ -1,4 +1,5 @@
 $prefixes: -webkit-, -moz-, -ms-, -o-, '';
+// -webkit-はGoogleChromeとSafari, -moz-はFire-box, -o-はOpera, -ms-はinternetExploer
 
 @mixin flexbox {
   @each $prefix in $prefixes {
