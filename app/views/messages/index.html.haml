@@ -1,62 +1,24 @@
 .wrapper
-
   = render 'side_bar'
-
   .main
     .header
       .left-header
         .left-header__title
           グループ名
-
         %ul.left-header__users
           Member：
           %li.user
-            ユーザー名
-          %li.user
-            ユーザー名
-          %li.user
-            ユーザー名
-
+            eee
       .right-header
         .right-header__button
-          Edit
-
+        = link_to "Edit", ""
     .messages
-
-      .message
-        .upper-message
-          .upper-message__user-name
-            ユーザー名
-          .upper-message__date
-            2019/03/18
-        .lower-meesage
-          .lower-message__content
-            メッセージ
-
-      .message
-        .upper-message
-          .upper-message__user-name
-            ユーザー名
-          .upper-message__date
-            2019/03/18
-        .lower-meesage
-          .lower-message__content
-            メッセージ
-
-      .message
-        .upper-message
-          .upper-message__user-name
-            ユーザー名
-          .upper-message__date
-            2019/03/18
-        .lower-meesage
-          .lower-message__content
-            メッセージ
+      = render partial: 'message', collection: @messages
     .form
-      %form
-        %input.form__message{name: "body", placeholder: "type a message", type: "text"}
+      = form_for [@group, @message] do |f|
+        = f.text_field :body, class: 'form__message', placeholder: 'type a message'
         .form__mask
-          %label.form__mask__image
+          = f.label :image, class: 'form__mask__image' do
             = fa_icon 'picture-o', class: 'icon'
-            %input.hidden{type: 'file'}
-        %input.form__submit{type: 'submit', value: 'Send'}
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
