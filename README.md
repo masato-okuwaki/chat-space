@@ -15,7 +15,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: false|
+|content|text|null: false|
 |user|references|foreign_key: true|
 |group|references|foreign_key: true|
 
