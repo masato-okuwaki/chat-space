@@ -4,14 +4,14 @@
     .header
       .left-header
         .left-header__title
-          グループ名
+          = @group.name
         %ul.left-header__users
-          Member：
+          Members:
           %li.user
-            eee
+          = @group.users.pluck(:name).join(",")
       .right-header
         .right-header__button
-        = link_to "Edit", ""
+        = link_to 'Edit', edit_group_path(@group.id), class: 'right-header__button'
     .messages
       = render partial: 'message', collection: @messages
     .form
