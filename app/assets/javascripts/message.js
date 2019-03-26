@@ -1,9 +1,6 @@
 $(document).on('turbolinks:load', function() {
   function buildHTML(message) {
-    var addImage = '';
-    if (message.image) {
-      addImage = `<img src="${message.image}" class="lower-message__image">`;
-    }
+    var addImage = message.image ? `<img src='${message.image}'> ` : '';
     var html = `
       <div class="message" data-message-id="${message.id}">
         <div class="upper-message" data-message-id="${message.id}">
@@ -11,7 +8,9 @@ $(document).on('turbolinks:load', function() {
           <div class="upper-message__date">${message.date}</div>
         </div>
         <div class="lower-meesage">
-          <p class="lower-message__content">${message.content}</p>
+          <p class="lower-message__content">
+            ${message.content}
+          </p>
           ${addImage}
         </div>
       </div>`;
@@ -33,10 +32,9 @@ $('.new_message').on('submit', function(e) {
     .done(function(message) {
       var html = buildHTML(message);
       $('.messages').append(html);
-      $('.form__message').val('');
       $('.form__submit').prop('disabled', false);
       $('.messages').animate({scrollTop: $(".messages")[0].scrollHeight}, "fast");
-      // $('.hidden').remove();
+      $('#new_message')[0].reset();
     })
     .fail(function(message) {
       alert('メッセージを入力してください');
