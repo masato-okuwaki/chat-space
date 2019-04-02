@@ -61,10 +61,12 @@ $('.new_message').on('submit', function(e) {
         dataType: 'json'
       })
       .done(function(data){
-        if (data.length){
-        $.each(data, function(i, data){
+        console.log(data)
+        if (data.length !== 0){
+        data.forEach(function(data){
           var html = buildHTML(data);
-          $('.messages').append(html)
+          $('.messages').append(html);
+          $('.messages').animate({scrollTop: $(".messages")[0].scrollHeight}, "fast");
         })
       }
       })
