@@ -61,7 +61,6 @@ $('.new_message').on('submit', function(e) {
         dataType: 'json'
       })
       .done(function(data){
-        console.log(data)
         if (data.length !== 0){
         data.forEach(function(data){
           var html = buildHTML(data);
