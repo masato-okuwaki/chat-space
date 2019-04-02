@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function() {
+  // 非同期通信
   function buildHTML(message) {
     var addImage = message.image ? `<img src='${message.image}'> ` : '';
     var html = `
@@ -8,9 +9,7 @@ $(document).on('turbolinks:load', function() {
           <div class="upper-message__date">${message.date}</div>
         </div>
         <div class="lower-meesage">
-          <p class="lower-message__content">
-            ${message.content}
-          </p>
+          <p class="lower-message__content">${message.content}</p>
           ${addImage}
         </div>
       </div>`;
@@ -40,4 +39,39 @@ $('.new_message').on('submit', function(e) {
       alert('メッセージを入力してください');
     })
   });
+
+  // 自動更新
+  $(function() {
+    $(function() {
+      if (location.pathname.match(/\/groups\/\d+\/messages/)) {
+        setInterval(update, 5000);
+      }
+    });
+    function update(){
+      if($('.message')[0]){
+        var message_id = $('.message:last').data('message-id');
+      } else {
+        return false
+      }
+
+      $.ajax({
+        url: location.href,
+        type: 'GET',
+        data: { id: message_id },
+        dataType: 'json'
+      })
+      .done(function(data){
+        if (data.length){
+        $.each(data, function(i, data){
+          var html = buildHTML(data);
+          $('.messages').append(html)
+        })
+      }
+      })
+      .fail(function(){
+        alert('自動更新に失敗しました')
+      })
+    }
+  })
+
 });

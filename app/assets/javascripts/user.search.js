@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
 
+  // インクリメンタルサーチ
   var search_list = $("#user-search-result");
 
   function appendUserName(user) {
@@ -41,6 +42,7 @@ $(document).on('turbolinks:load', function() {
       })
   });
 
+  // 追加ボタンと削除ボタンの機能
   var search_list_add = $("#chat-group-users");
 
   function appendUserNameAdd(user_name, user_id) {
