@@ -48,12 +48,7 @@ $('.new_message').on('submit', function(e) {
       }
     });
     function update(){
-      if($('.message')[0]){
-        var message_id = $('.message:last').data('message-id');
-      } else {
-        return false
-      }
-
+      var message_id = $('.message') ? $('.message:last').data('message-id') : 0;
       $.ajax({
         url: location.href,
         type: 'GET',
