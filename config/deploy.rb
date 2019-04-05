@@ -25,6 +25,11 @@ set :default_env, {
   AWS_SECRET_ACCESS_KEY: ENV["AWS_SECRET_ACCESS_KEY"]
 }
 
+server "13.112.85.62", user: "ec2-user", roles: %w{app db web}
+
+set :rails_env, "production"
+set :unicorn_rack_env, "production"
+
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
