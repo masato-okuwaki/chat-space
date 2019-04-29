@@ -31,17 +31,19 @@ $('.new_message').on('submit', function(e) {
     .done(function(message) {
       var html = buildHTML(message);
       $('.messages').append(html);
-      $('.form__submit').prop('disabled', false);
       $('.messages').animate({scrollTop: $(".messages")[0].scrollHeight}, "fast");
       $('#new_message')[0].reset();
     })
-    .fail(function(message) {
+    .fail(function() {
       alert('メッセージを入力してください');
+    })
+    .always(function() {
+      $('.form__submit').prop('disabled', false);
     })
   });
 
   // 自動更新
-  $(function() {
+  // $(function() {
     $(function() {
         setInterval(update, 5000);
     });
@@ -61,13 +63,13 @@ $('.new_message').on('submit', function(e) {
             $('.messages').append(html);
             $('.messages').animate({scrollTop: $(".messages")[0].scrollHeight}, "fast");
           })
-        }
+          }
         })
         .fail(function(){
           alert('自動更新に失敗しました')
         })
       }
     }
-  })
+  // })
 
 });
