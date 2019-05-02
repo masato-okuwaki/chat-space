@@ -18,12 +18,26 @@ $(document).on('turbolinks:load', function() {
     search_list.append(html);
   }
 
+
   $("#user-search-field").on("keyup", function() {
-    var input = $("#user-search-field").val();
+    var input = $(this).val();
+    var selected_users = [];
+    selected_users.length = 0;
+
+    $(".chat-group-user__selected_user_id").each(function(){
+      selected_users.push($(this).attr("value"));
+    });
+
+    if(input.length == 0){
+      $("#user-search-result").empty();
+    } else{
       $.ajax({
         type: 'GET',
         url: '/users',
-        data: { name: input },
+        data: {
+          name: input,
+          selected_users: selected_users
+        },
         dataType: 'json'
       })
       .done(function(users) {
@@ -40,6 +54,7 @@ $(document).on('turbolinks:load', function() {
       .fail(function() {
         alert('名前検索に失敗しました');
       })
+    }
   });
 
   // 追加ボタンと削除ボタンの機能
@@ -47,7 +62,7 @@ $(document).on('turbolinks:load', function() {
 
   function appendUserNameAdd(user_name, user_id) {
      var html =`<div class='chat-group-user clearfix' id='chat-group-user-space'>
-                  <input name='group[user_ids][]' type='hidden' value='${user_id}'>
+                  <input name='group[user_ids][]' type='hidden' value='${user_id}' class="chat-group-user__selected_user_id">
                   <p class='chat-group-user__name'>${user_name}</p>
                   <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
                 </div>`

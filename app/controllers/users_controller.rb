@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.where('name LIKE(?)', "%#{params[:name]}%").where.not(id: current_user.id)
-   respond_to do |format|
-     format.html
-     format.json
+    @users = User.where('name LIKE(?) and id NOT IN (?)', "%#{params[:name]}%", excluded_users)
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 
@@ -23,6 +23,17 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email)
+  end
+
+  def excluded_users
+    excluded_users = []
+    excluded_users << current_user.id
+    if params[:selected_users]
+      params[:selected_users].map do |user_id|
+        excluded_users << user_id.to_i
+      end
+    end
+    return excluded_users
   end
 
 end

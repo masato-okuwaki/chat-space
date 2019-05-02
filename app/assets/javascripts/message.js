@@ -51,7 +51,6 @@ $('.new_message').on('submit', function(e) {
 
        if (location.pathname.match(/\/groups\/\d+\/messages/)) {
         var message_id = $('.message') ? $('.message:last').data('message-id') : 0;
-        debugger;
         $.ajax({
           url: "api/messages",
           type: 'GET',
