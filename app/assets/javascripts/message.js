@@ -48,10 +48,12 @@ $('.new_message').on('submit', function(e) {
         setInterval(update, 5000);
     });
     function update(){
+
        if (location.pathname.match(/\/groups\/\d+\/messages/)) {
         var message_id = $('.message') ? $('.message:last').data('message-id') : 0;
+        debugger;
         $.ajax({
-          url: location.href,
+          url: "api/messages",
           type: 'GET',
           data: { id: message_id },
           dataType: 'json'
