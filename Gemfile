@@ -42,6 +42,11 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -67,5 +72,8 @@ gem 'fog-aws'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'mini_magick'
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'rails-erd'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
