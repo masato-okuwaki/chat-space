@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   // 非同期通信
   function buildHTML(message) {
-
+    var addImage = message.image ? `<img src='${message.image}'> ` : '';
     var html = `
       <div class="message" data-message-id="${message.id}">
         <div class="upper-message" data-message-id="${message.id}">
@@ -16,7 +16,8 @@ $(document).on('turbolinks:load', function() {
     return html;
   };
 
-$('.new_message').on('submit', function() {
+$('.new_message').on('submit', function(e) {
+    e.preventDefault();
     var formdata = new FormData(this);
     var url = $(this).attr('action');
     $.ajax({
