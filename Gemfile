@@ -76,4 +76,3 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'rails-erd'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
